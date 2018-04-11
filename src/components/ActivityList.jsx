@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import { Jumbotron, Grid, Row, Col, Image, Button } from 'react-bootstrap';
-import './Home.css';
+import './ActivityList.css';
 import axios from 'axios';
 
 class Udemy extends Component {
@@ -99,7 +99,7 @@ class MainEventTemp extends Component {
                           <h2 className="work-subheading">{this.props.name}</h2>
                             <p className="work-para">{this.props.long}</p>
                            
-                            <button className="work-subbutton">{this.props.short}</button>  
+                           <input type="submit" className="work-subbutton" value="Join"/>
                              
                         </div>
                         <div className="col-sm-3" >
