@@ -5,6 +5,7 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Glyphicon } from 'react-bo
 import { Link } from 'react-router-dom'
 
 import axios from 'axios';
+import './ActivityDetail.css'
 
 
 
@@ -23,7 +24,7 @@ import axios from 'axios';
   componentDidMount () {
 
     axios
-            .get(this.props.getUrl)
+            .get('https://api.kloh.in/kloh/external/v1/activity/AID1804091828170148RCGAG6JGKUL2B7W1W')
             .then(response => {
               // console.log(response.data)
               this.setState({ mappedMainEventsDetails: response.data.response })             
@@ -41,7 +42,7 @@ import axios from 'axios';
       <div>
         <Grid>
         <Row>
-          <Col md={12} sm={12} lg={12}  className='heading-landing'>
+          <Col md={12} sm={12} lg={12} className="EventsCurrent">
                         Highlighted Event Details
               
         </Col>
@@ -59,13 +60,14 @@ import axios from 'axios';
                 title={this.state.mappedMainEventsDetails.title}
                 amount={this.state.mappedMainEventsDetails.amount}
                 ownerProfileImageUrl={this.state.mappedMainEventsDetails.ownerProfileImageUrl}
-
+                faqUrl={this.state.mappedMainEventsDetails.faqUrl}
+                summary= {this.state.mappedMainEventsDetails.summary}
+                // time={this.state.mappedMainEventsDetails.activityTime.activitysummaryStringV1} 
                 
                 
                             />
             </Grid>
                 }
-                <div>shdcfb:{this.props.url}</div>
       </div>
     )
   }
@@ -83,15 +85,36 @@ class MainEventTemp extends Component {
 
         <div>
         	
-        	<div>remainingSlots:{this.props.remainingSlots}</div>
-        	<div>memberName:{this.props.memberName}</div>
         	
 
-        	<div>description:{this.props.description}</div>
-        	<div>title:{this.props.title}</div>
-        	<div>amount:{this.props.amount}</div>
 
-        	<div>ownerProfileImageUrl:<img src={this.props.ownerProfileImageUrl}/></div>
+        	   <div className="row section-banner">
+                          <div className=" col-md-12">
+                            <div>
+                               <div className="card">
+                                  <div className="row">
+                                    <div className="col-sm-4 image-work" >
+                                      <img className="kunal-work-two" src={this.props.ownerProfileImageUrl}/>
+                                    </div>
+                                    <div className="col-sm-5 mobile-padding">
+                                      <h2 className="work-subheading">{this.props.title}</h2>
+                                        <p className="work-para">{this.props.description}</p>
+                                       
+                                         
+                                    </div>
+                                    <div className="col-sm-3" >
+                                      <div className="remainingDetails">
+                                          <div><span className="details">remainingSlots:</span>{this.props.remainingSlots}</div>
+                                        <div><span className="details">amount:</span>{this.props.amount} </div>
+                                        <div><span className="details">faqUrl</span><a href={this.props.faqUrl}>  FAQ's</a></div>
+                                        <div><span className="details">summary:</span>{this.props.summary} </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>                 
+                            </div>
+                          </div>
+                        </div>
 
         </div>
       
