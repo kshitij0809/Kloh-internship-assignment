@@ -29,6 +29,7 @@ h3 {
     border-radius: 0.5em;
     padding: 16px;
     margin: 25px;
+    background-color: white;
 }
 
 /* On mouse-over, add a deeper shadow */

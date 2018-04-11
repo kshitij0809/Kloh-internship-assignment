@@ -82,10 +82,11 @@ import Udemy from './ActivityList'
                 
                 
                             />
+                            <button className="work-subbutton" onClick={this.handleGone}>Go Back</button> 
             </Grid>
                 }
 
-        <button className="work-subbutton" onClick={this.handleGone}>Go Back</button> 
+        
       </div>
     )}
     else{
