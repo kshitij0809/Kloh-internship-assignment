@@ -80,13 +80,6 @@ class MainEventTemp extends Component {
     
     
     return (
-
-       
-  
-            
-           
-
-
             <div className="row section-banner">
               <div className="col-md-offset-1 col-md-12">
                 <div>
@@ -99,7 +92,7 @@ class MainEventTemp extends Component {
                           <h2 className="work-subheading">{this.props.name}</h2>
                             <p className="work-para">{this.props.long}</p>
                            
-                           <input type="submit" className="work-subbutton" value="Join"/>
+                            <button className="work-subbutton">Join</button>  
                              
                         </div>
                         <div className="col-sm-3" >
@@ -115,10 +108,7 @@ class MainEventTemp extends Component {
                 </div>
               </div>
             </div>
-          
-         
-      
-    )
+          )
 
   }
 

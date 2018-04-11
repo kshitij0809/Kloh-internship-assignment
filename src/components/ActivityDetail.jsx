@@ -4,6 +4,7 @@ import { Row, Grid, Col,ButtonToolbar,Button } from 'react-bootstrap'
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem, Glyphicon } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+import axios from 'axios';
 
 
 
@@ -12,18 +13,17 @@ import { Link } from 'react-router-dom'
   constructor (props, context) {
     super(props, context)
     this.state = {
-      mappedMainEvents: []
-    }
+      mappedMainEventsDetails: []
+    };
     
   }
   componentDidMount () {
     axios
-            .get(API_DOMAIN+'/api/events/?highlighted=true')
+            .get('https://api.kloh.in/kloh/external/v1/activity/AID171018171227598DWY6ZBZFKTHANJ8N4T')
             .then(response => {
               // console.log(response.data)
-              this.setState({ mappedMainEvents: response.data })
-              this.Bplanincreasehorizontalline()
-              this.renderingviewmore()
+              this.setState({ mappedMainEventsDetails: response.data.response })
+             
             })
             .catch(error => {
               console.log(error)
@@ -44,16 +44,20 @@ import { Link } from 'react-router-dom'
         </Col>
         </Row>
         </Grid>
-        {this.state.mappedMainEvents.map((event, key) => (
+        {this.state.mappedMainEventsDetails((event, key) => (
           <div key={key}>
             <Grid className='main-events-grid'>
               <MainEventTemp
-                name={event.title}
-                short={event.tagline}
-                long={event.short_description}
-                image={event.image}                
-                websiteUrl={event.website_url}
-                end_point={event.end_point}
+                name={event.activityUserList}
+                remainingSlots={event.remainingSlots}
+                memberName={event.memberName}
+                tags={event.tags}
+                description={event.description}
+
+                title={event.title}
+                amount={event.amount}
+                ownerProfileImageUrl={event.ownerProfileImageUrl}
+                
                             />
             </Grid>
           </div>
@@ -69,130 +73,44 @@ class MainEventTemp extends Component {
   }
 
   render () {
-    var compname = this.props.name;
-    var endpoint = this.props.end_point;
+   
     
     return (
 
-        <Grid fluid className='fluid-event-landing'>
-          <Row className='main-event-row'>
-  
-            <Col md={1} sm={12} xs={12}>
-              <div className='vl'/>
-            </Col>
-            <Col md={6} sm={12} xs={12}>
-              <div className='main-event'>
-                <p className='main-event-heading'>
-                  <ul className="removeBullets"><li className='mainevent-li'><span className="landing-mainevent-name">{this.props.name}</span></li></ul>
-                </p>
-                <h3 className='main-event-short-description'>{this.props.short}</h3>
-                <p className='main-event-long-description'>{this.props.long}</p>
-                <h3 className='main-event-short-description'>{this.props.websiteUrl}</h3>
-                <ButtonToolbar>
-                  <Button bsStyle="primary" bsClass="button-view" className="viewmorebuttonlandingpage-landing" onClick={() => {
-                  
-                window.open(this.props.end_point,'_blank');
-              
-								}}>View More</Button>
-                </ButtonToolbar>
-                {/* <button
-                  type="button"
-                                  className="view-more"
-                                  // onClick method improve
-                  onClick={() => {
-                    window.location.href = '';
-                  }}
-                >
-                  <span>VIEW MORE</span>
-                </button> */}
-              </div>
-            </Col>
-            <Col md={5} sm={12} xs={12}>
-              <div>
-                <img className='main-circle-image' src={this.props.image} />
-              </div>
-            </Col>
-          </Row>
-          {/* {moredetails} */}
-          
-        </Grid>
+        <div>
+        	<div>name:{this.props.name}</div>
+        	<div>remainingSlots:{this.props.remainingSlots}</div>
+        	<div>memberName:{this.props.memberName}</div>
+        	<div>tags:{this.props.tags}</div>
+
+        	<div>description:{this.props.description}</div>
+        	<div>title:{this.props.title}</div>
+        	<div>amount:{this.props.amount}</div>
+
+        	<div>ownerProfileImageUrl:<img src={this.props.ownerProfileImageUrl}/></div>
+        </div>
       
     )
 
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-class Udemy extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleLoginClick = this.handleLoginClick.bind(this);
-    this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.state = {isLoggedIn: 'one'};
-  }
-
-  handleLoginClick() {
-    this.setState({isLoggedIn: 'one'});
-  }
-
-  handleLogoutClick() {
-    this.setState({isLoggedIn: 'two'});
-  }
-
-  render() {
-    const isLoggedIn = this.state.isLoggedIn;
-    
-    let buttonOne = null;
-        let buttonTwo = null;
-     {
-      buttonOne = <button onClick={this.handleLogoutClick} > one</button>;
-    } 
-    {
-      buttonTwo = <button onClick={this.handleLoginClick}> two</button>;
-    }
-
-    return (
-      <div>
-      {buttonOne}
-        {buttonTwo}
-        <Greeting isLoggedIn={isLoggedIn} />
-        
-      </div>
-    );
-  }
-}
-
-function UserGreeting(props) {
-  return <h1>Welcome back!</h1>;
-}
-
-function GuestGreeting(props) {
-  return <h1>Please sign up.</h1>;
-}
-
-function Greeting(props) {
-  const isLoggedIn = props.isLoggedIn;
-  if (isLoggedIn=='one') {
-    return <UserGreeting />;
-  }
-  return <Login />;
-}
-
-
-
 export default Details;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
