@@ -13,7 +13,7 @@ import axios from 'axios';
   constructor (props, context) {
     super(props, context)
     this.state = {
-      mappedMainEventsDetails: []
+      mappedMainEventsDetails:'',
     };
     
   }
@@ -22,8 +22,7 @@ import axios from 'axios';
             .get('https://api.kloh.in/kloh/external/v1/activity/AID171018171227598DWY6ZBZFKTHANJ8N4T')
             .then(response => {
               // console.log(response.data)
-              this.setState({ mappedMainEventsDetails: response.data.response })
-             
+              this.setState({ mappedMainEventsDetails: response.data.response })             
             })
             .catch(error => {
               console.log(error)
@@ -44,24 +43,22 @@ import axios from 'axios';
         </Col>
         </Row>
         </Grid>
-        {this.state.mappedMainEventsDetails((event, key) => (
-          <div key={key}>
+        {
             <Grid className='main-events-grid'>
               <MainEventTemp
-                name={event.activityUserList}
-                remainingSlots={event.remainingSlots}
-                memberName={event.memberName}
-                tags={event.tags}
-                description={event.description}
 
-                title={event.title}
-                amount={event.amount}
-                ownerProfileImageUrl={event.ownerProfileImageUrl}
+                remainingSlots={this.state.mappedMainEventsDetails.remainingSlots}
+                memberName={this.state.mappedMainEventsDetails.memberName}
+
+                description={this.state.mappedMainEventsDetails.description}
+
+                title={this.state.mappedMainEventsDetails.title}
+                amount={this.state.mappedMainEventsDetails.amount}
+                ownerProfileImageUrl={this.state.mappedMainEventsDetails.ownerProfileImageUrl}
                 
                             />
             </Grid>
-          </div>
-                ))}
+                }
       </div>
     )
   }
@@ -78,10 +75,10 @@ class MainEventTemp extends Component {
     return (
 
         <div>
-        	<div>name:{this.props.name}</div>
+        	
         	<div>remainingSlots:{this.props.remainingSlots}</div>
         	<div>memberName:{this.props.memberName}</div>
-        	<div>tags:{this.props.tags}</div>
+        	
 
         	<div>description:{this.props.description}</div>
         	<div>title:{this.props.title}</div>
