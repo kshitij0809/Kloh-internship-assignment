@@ -4,14 +4,17 @@ import { Jumbotron, Grid, Row, Col, Image, Button } from 'react-bootstrap';
 import './ActivityList.css';
 import axios from 'axios';
 
+import Details from './ActivityDetail'
+
 class Udemy extends Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
-      mappedMainEvents: []
+      mappedMainEvents: [],
+      isSubmitted: false
 
     };
-   
+   this.handleFormSubmit = this.handleFormSubmit.bind(this);
     
   }
 
@@ -41,8 +44,24 @@ class Udemy extends Component {
 
 
    
-  
+  handleFormSubmit(e) {
+    e.preventDefault();
+   
+    this.setState({isSubmitted: true});
+
+     this.render();
+
+    
+  }
+
+
   render () {
+
+
+    const isSubmitted = this.state.isSubmitted;
+
+
+    if(!isSubmitted){
     return (
       <div className="width-column">
         <h1 className="EventsCurrent">Current Ongoing Events</h1>
@@ -50,67 +69,54 @@ class Udemy extends Component {
         {this.state.mappedMainEvents.map((event, key) => (
           <div className="row" key={key}>
             
-              <MainEventTemp
-                name={event.title}
-                short={event.ownerType}
-                long={event.description}
-                websiteUrl={event.imageUrl}
-                ownerProfileImageUrl={event.ownerProfileImageUrl}
-                date={event.activityTime.activityDateString}
-                duration={event.activityTime.activityDateStringV1} 
-                location={event.location.name}
-               
-                            />
+             
+
+                         <div className="row section-banner">
+                          <div className="col-md-offset-1 col-md-12">
+                            <div>
+                               <div className="card">
+                                  <div className="row">
+                                    <div className="col-sm-4 image-work" >
+                                      <img className="kunal-work-two" src={event.imageUrl}/>
+                                    </div>
+                                    <div className="col-sm-5 mobile-padding">
+                                      <h2 className="work-subheading">{event.title}</h2>
+                                        <p className="work-para">{event.description}</p>
+                                       
+                                        <button className="work-subbutton" onClick={this.handleFormSubmit}>Join</button>  
+                                         
+                                    </div>
+                                    <div className="col-sm-3" >
+                                      <img className="kunal-work-one" src={event.ownerProfileImageUrl}/>
+                                      <div>
+                                          <div><span className="details">date:</span>{event.activityTime.activityDateString}</div>
+                                        <div><span className="details">duration:</span>{event.activityTime.activityDateStringV1} </div>
+                                        <div><span className="details">location:</span>{event.location.name}</div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>                 
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
                             
           </div>
                 ))}
         
       </div>
-    )
+    )}
+    else{
+      return (<Details
+                  getUrl={this.state.mappedMainEvents.shareUrl}/>)
+
+    }
   }
 }
 
-class MainEventTemp extends Component {
-  constructor (props) {
-    super(props);
-    
-   }
 
-  render () {
-    
-    
-    return (
-            <div className="row section-banner">
-              <div className="col-md-offset-1 col-md-12">
-                <div>
-                   <div className="card">
-                      <div className="row">
-                        <div className="col-sm-4 image-work" >
-                          <img className="kunal-work-two" src={this.props.websiteUrl}/>
-                        </div>
-                        <div className="col-sm-5 mobile-padding">
-                          <h2 className="work-subheading">{this.props.name}</h2>
-                            <p className="work-para">{this.props.long}</p>
-                           
-                            <button className="work-subbutton">Join</button>  
-                             
-                        </div>
-                        <div className="col-sm-3" >
-                          <img className="kunal-work-one" src={this.props.ownerProfileImageUrl}/>
-                          <div>
-                              <div><span className="details">date:</span>{this.props.date}</div>
-                            <div><span className="details">duration:</span>{this.props.duration}</div>
-                            <div><span className="details">location:</span>{this.props.location}</div>
-                            </div>
-                        </div>
-                      </div>
-                    </div>                 
-                </div>
-              </div>
-            </div>
-          )
-
-  }
-
-}
 export default Udemy;

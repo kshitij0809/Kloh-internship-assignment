@@ -10,16 +10,20 @@ import axios from 'axios';
 
 
  class Details extends Component {
-  constructor (props, context) {
-    super(props, context)
+ 	
+  constructor (props) {
+    
+    super(props)
     this.state = {
       mappedMainEventsDetails:'',
     };
     
   }
+
   componentDidMount () {
+
     axios
-            .get('https://api.kloh.in/kloh/external/v1/activity/AID171018171227598DWY6ZBZFKTHANJ8N4T')
+            .get(this.props.getUrl)
             .then(response => {
               // console.log(response.data)
               this.setState({ mappedMainEventsDetails: response.data.response })             
@@ -38,7 +42,7 @@ import axios from 'axios';
         <Grid>
         <Row>
           <Col md={12} sm={12} lg={12}  className='heading-landing'>
-                        highlighted events
+                        Highlighted Event Details
               
         </Col>
         </Row>
@@ -55,10 +59,13 @@ import axios from 'axios';
                 title={this.state.mappedMainEventsDetails.title}
                 amount={this.state.mappedMainEventsDetails.amount}
                 ownerProfileImageUrl={this.state.mappedMainEventsDetails.ownerProfileImageUrl}
+
+                
                 
                             />
             </Grid>
                 }
+                <div>shdcfb:{this.props.url}</div>
       </div>
     )
   }
@@ -85,6 +92,7 @@ class MainEventTemp extends Component {
         	<div>amount:{this.props.amount}</div>
 
         	<div>ownerProfileImageUrl:<img src={this.props.ownerProfileImageUrl}/></div>
+
         </div>
       
     )
