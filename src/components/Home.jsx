@@ -45,10 +45,10 @@ class Udemy extends Component {
   render () {
     return (
       <div className="width-column">
-        
+        <h1 className="EventsCurrent">Current Ongoing Events</h1>
         
         {this.state.mappedMainEvents.map((event, key) => (
-          <div key={key}>
+          <div className="row" key={key}>
             
               <MainEventTemp
                 name={event.title}
@@ -80,16 +80,28 @@ class MainEventTemp extends Component {
        
   
             
-            <div className="card">
-              <div className='main-event'>
-               <div>{this.props.name}</div>
-               <div>{this.props.short}</div>
-               <div>{this.props.long}</div>
-               <div><img src={this.props.websiteUrl}/></div>
+           
+
+
+            <div class="row section-banner">
+              <div class="col-md-offset-1 col-md-12">
+                <div>
+                   <div class="card">
+                      <div class="row">
+                        <div class="col-sm-5 image-work" >
+                          <img class="kunal-work-two" src={this.props.websiteUrl}/>
+                        </div>
+                        <div class="col-sm-7 mobile-padding">
+                          <h2 class="work-subheading">{this.props.name}</h2>
+                            <p class="work-para">{this.props.long}</p>
+                            <button class="work-subbutton">{this.props.short}</button>
+                        </div>
+                      </div>
+                    </div>                 
+                </div>
               </div>
-             
-         
-            </div>            
+            </div>
+          
          
       
     )
