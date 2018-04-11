@@ -55,6 +55,10 @@ class Udemy extends Component {
                 short={event.ownerType}
                 long={event.description}
                 websiteUrl={event.imageUrl}
+                ownerProfileImageUrl={event.ownerProfileImageUrl}
+                date={event.activityTime.activityDateString}
+                duration={event.activityTime.activityDateStringV1} 
+                location={event.location.name}
                
                             />
                             
@@ -83,18 +87,28 @@ class MainEventTemp extends Component {
            
 
 
-            <div class="row section-banner">
-              <div class="col-md-offset-1 col-md-12">
+            <div className="row section-banner">
+              <div className="col-md-offset-1 col-md-12">
                 <div>
-                   <div class="card">
-                      <div class="row">
-                        <div class="col-sm-5 image-work" >
-                          <img class="kunal-work-two" src={this.props.websiteUrl}/>
+                   <div className="card">
+                      <div className="row">
+                        <div className="col-sm-4 image-work" >
+                          <img className="kunal-work-two" src={this.props.websiteUrl}/>
                         </div>
-                        <div class="col-sm-7 mobile-padding">
-                          <h2 class="work-subheading">{this.props.name}</h2>
-                            <p class="work-para">{this.props.long}</p>
-                            <button class="work-subbutton">{this.props.short}</button>
+                        <div className="col-sm-5 mobile-padding">
+                          <h2 className="work-subheading">{this.props.name}</h2>
+                            <p className="work-para">{this.props.long}</p>
+                           
+                            <button className="work-subbutton">{this.props.short}</button>  
+                             
+                        </div>
+                        <div className="col-sm-3" >
+                          <img className="kunal-work-one" src={this.props.ownerProfileImageUrl}/>
+                          <div>
+                              <div><span className="details">date:</span>{this.props.date}</div>
+                            <div><span className="details">duration:</span>{this.props.duration}</div>
+                            <div><span className="details">location:</span>{this.props.location}</div>
+                            </div>
                         </div>
                       </div>
                     </div>                 
