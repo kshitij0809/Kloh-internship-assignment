@@ -11,7 +11,8 @@ class Udemy extends Component {
     super(props, context)
     this.state = {
       mappedMainEvents: [],
-      isSubmitted: false
+      isSubmitted: false,
+      shareUrl:''
 
     };
    this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -44,14 +45,12 @@ class Udemy extends Component {
 
 
    
-  handleFormSubmit(e) {
+  handleFormSubmit(url,e) {
     e.preventDefault();
-   
-    this.setState({isSubmitted: true});
-
-     this.render();
-
-    
+    this.setState({
+      isSubmitted: true,
+      shareUrl: url,
+    });
   }
 
 
@@ -83,7 +82,7 @@ class Udemy extends Component {
                                       <h2 className="work-subheading">{event.title}</h2>
                                         <p className="work-para">{event.description}</p>
                                        
-                                        <button className="work-subbutton" onClick={this.handleFormSubmit}>Join</button>  
+                                        <button className="work-subbutton" onClick={e => this.handleFormSubmit(event.activityId,e)}>Join</button>  
                                          
                                     </div>
                                     <div className="col-sm-3" >
@@ -112,7 +111,7 @@ class Udemy extends Component {
     )}
     else{
       return (<Details
-                  getUrl={this.state.mappedMainEvents.shareUrl}/>)
+                  getUrl={this.state.shareUrl}/>)
 
     }
   }

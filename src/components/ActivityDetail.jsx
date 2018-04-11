@@ -22,9 +22,9 @@ import './ActivityDetail.css'
   }
 
   componentDidMount () {
-
+  	let getUrl = `https://api.kloh.in/kloh/external/v1/activity/${this.props.getUrl}`;
     axios
-            .get('https://api.kloh.in/kloh/external/v1/activity/AID1804091828170148RCGAG6JGKUL2B7W1W')
+            .get(getUrl)
             .then(response => {
               // console.log(response.data)
               this.setState({ mappedMainEventsDetails: response.data.response })             
