@@ -8,6 +8,7 @@ import axios from 'axios';
 import './ActivityDetail.css'
 
 
+import Udemy from './ActivityList'
 
 
  class Details extends Component {
@@ -17,8 +18,10 @@ import './ActivityDetail.css'
     super(props)
     this.state = {
       mappedMainEventsDetails:'',
+      isGone: false,
     };
-    
+      this.handleGone = this.handleGone.bind(this);
+ 
   }
 
   componentDidMount () {
@@ -37,7 +40,20 @@ import './ActivityDetail.css'
    
   }
   
+
+   handleGone(e) {
+    e.preventDefault();
+    this.setState({
+      isGone: true,
+    });
+  }
+
+
   render () {
+
+  	const isGone = this.state.isGone;
+  	    if(!isGone){
+
     return (
       <div>
         <Grid>
@@ -68,8 +84,13 @@ import './ActivityDetail.css'
                             />
             </Grid>
                 }
+
+        <button className="work-subbutton" onClick={this.handleGone}>Go Back</button> 
       </div>
-    )
+    )}
+    else{
+    	return <Udemy/>
+    }
   }
 }
 
